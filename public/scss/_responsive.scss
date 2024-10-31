@@ -1,0 +1,177 @@
+@media screen and (max-width: 1280px) {
+    .hero__log-in,
+    .hero__sign-up {
+        width: 15vw;
+
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .tasks__header {
+        font-size: 1.2rem;
+        
+    }
+    .hero__buttons {
+        font-size: 1rem;
+    }
+    .hero__header {
+        font-size: 3rem;
+    }
+    
+    .hero__text {
+        font-size: 1.5rem;
+    }
+
+    .hero__log-in,
+    .hero__sign-up {
+        width: 25vw;
+    
+    }
+
+    .error {
+        img{
+            width: 80vw;
+        }
+    }
+
+   .notification-error,
+   .notification-success,
+   .internal-error{
+        width: 25vw;
+    }
+    //signup/login
+
+    .sign-up,
+    .log-in {
+        height: auto;
+        margin-top: 15%;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .sign-up__wrapper,
+    .log-in__wrapper{
+        flex: 1 1 40%;
+        padding: 0;
+    }
+
+    .sign-up__form,
+    .log-in__form {
+        padding: 0;
+        width: 60vw;
+    }
+
+    .sign-up__image,
+    .log-in__image {
+        scale: 1;
+        width: auto;
+        img{
+            width: 100%;
+        }
+    }
+
+   .notification-error,
+   .notification-success,
+   .internal-error {
+      width: 30vw;
+   }
+
+}
+
+@media screen and (max-width: 520px) {
+    :root {
+        font-size: 14px;
+    }
+
+    .tasks__delete {
+        display: none;
+    }
+    
+    .tasks__add {
+        margin-right: 0;
+        font-size: 1.1rem;
+    }
+    
+    .tasks__header {
+        margin-bottom: 2.5em;
+    }
+
+
+    .header__buttons-auth{
+        span{
+            display: none;
+        }
+    }
+    .header__log-out{
+        font-size: 1.1rem;
+    }
+
+    .task__name {
+        max-width: 40vw;
+    }
+    .sign-up__form,
+    .log-in__form{
+        width: 80vw;
+    }
+
+}
+
+@media screen and (max-width: 360px) {
+    :root {
+        font-size: 12px;
+    }
+
+    .log-in__image,
+    .sign-up__image{
+        display: none;
+    }
+
+    .sign-up,
+    .log-in {
+        flex-direction: row;
+        align-items: center;
+        padding: 1em;      
+        margin-top: 0;
+    }
+
+    .sign-up__form,
+    .log-in__form{
+        width: 90vw;
+        margin: 0 auto;
+    }
+    
+    .new-task {
+        textarea {
+            height: 30vh;
+        }
+    }
+
+    .title{
+        display: block;
+    }
+
+    .error {
+        img {
+            width: 90vw;
+        }
+    }
+
+    .header__log-in {
+        margin-right: .5em;
+    }
+
+    .hero__log-in,
+    .hero__sign-up {
+        width: 30vw;
+    }
+
+    .task__name{
+        max-width: 30vw;
+        margin-right: 0;
+    }
+
+   .notification-error,
+   .notification-success,
+   .internal-error {
+      width: 35vw;
+   }
+}

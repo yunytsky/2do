@@ -1,0 +1,441 @@
+// reset
+@import "reset";
+// _______________________________________
+//fonts
+@import "fonts";
+// _______________________________________
+// animations
+@keyframes notification-show {
+    from{
+      right: -40%;
+    }
+    to{
+        right: 0;
+    }
+}
+
+@keyframes notification-hide {
+    from {
+        right: 0;
+    }
+
+    to {
+        right: -40%;
+    }
+}
+
+@keyframes edit {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 50vw;
+    }
+}
+// _______________________________________
+// colors
+$blue: #3057e8;
+$dark-blue: #3154d0;
+$gray: #484848;
+$light-gray: #767676;
+$gray-button: #dadada;
+$dark-gray-button: #d1d1d1;
+$red: #c22626;
+$green: #28ad28;
+// _______________________________________
+// buttons
+@import "buttons";
+
+// _______________________________________
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    @include fira-regular;
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+}
+
+.title {
+    user-select: none;
+    font-size: 1.4rem;
+    color: $light-gray;
+    text-align: center;
+    margin-bottom: 2em;
+    @include fira-bold;
+    display: none;
+}
+
+// header
+
+.header {
+    background-color: $blue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 1.25em 2em;
+    z-index: 999;
+    color: #fff;
+    
+    
+}
+
+.header.authorized {
+    background-color: $blue;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25em 2em;
+    margin-bottom: 2em;
+}
+
+.header__logo {
+    user-select: none;
+    @include concert-one;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.header__log-in, .header__sign-up{
+    color: #fff;
+}
+
+.header__buttons-auth{
+    span{
+        user-select: none;
+        margin-right:1.5em;
+    }
+}
+
+// _______________________________________
+// tasks
+
+.tasks {
+    flex: 1 0 auto;
+    padding: 0 3em 3em 3em;
+}
+
+.tasks__list {
+    margin-bottom: 4em
+}
+
+.task {
+    background-color: #fff;
+    @include fira-light;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2em;
+    border-bottom: 1px solid $gray;
+    padding-bottom: 1.5em;
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.task__main{
+    display: flex;
+    align-items: center;
+    position: relative;
+    label {
+        position: relative;
+        font-size: 1.6rem;
+        margin-right: 1.4em;
+    }
+}
+
+#checkbox {
+    z-index: -1;
+    opacity: 0;
+}
+
+.task__checkbox {
+    cursor: pointer;
+    border: 1.6px solid $blue;
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    &::before{
+        content: " ";
+        background: url('../img/checkmark.svg') 0 0/cover no-repeat;
+        width: 0;
+        height: 1em;
+        position: absolute;
+        left: 0;
+        top: -.15em;
+        transition: .5s;
+    }
+    &:hover {        
+        background-color: rgb(248, 248, 248);
+    }
+    &:active {
+        border: 1.6px solid $dark-blue;
+    }
+}
+
+.task__checkbox.checked {
+    &::before {
+        content: ' ';
+        background: url('../img/checkmark.svg') 0 0/cover no-repeat;
+        width:1em;
+        height: 1em;
+        position: absolute;
+        left: 0;
+        top: -.15em;
+        transition: .5s;
+    }
+}
+
+
+
+
+.tasks__header {
+    font-size: 1.4rem;
+    margin-bottom: 1.5em;
+    text-align: center;
+    color: rgba($color: #000000, $alpha: .7);
+}
+
+.task__name {
+    font-size: 1.2rem;
+    color: $gray;
+    max-width: 60vw;
+    margin-right: 1em;
+    position: relative;
+}
+
+.line{
+    display: inline-block;
+    position: absolute;
+    width: 0;
+    left: 0;
+    top: 50%;
+    background-color: $light-gray;
+    height: 1px;
+    transition: .5s;
+}
+
+.line.checked{
+    display: inline-block;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: 50%;
+    background-color: $light-gray;
+    height: 1px;
+    transition: .5s;
+}
+
+
+
+.task__operations {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.task__edit {
+    margin-right: .25em;
+    img {
+        width: 2em;
+    }
+    &:hover {
+        transform: scale(1.1);
+    }
+    &:active {
+        filter: brightness(0) saturate(100%) invert(17%) sepia(69%) saturate(2200%) hue-rotate(217deg) brightness(119%) contrast(100%);
+    }
+}
+
+.task__delete {
+    img {
+        width: 2.2em;
+    }
+    &:hover {
+        transform: scale(1.1);
+    }
+        
+    &:active {
+        filter: brightness(0) saturate(100%) invert(17%) sepia(69%) saturate(2200%) hue-rotate(217deg) brightness(119%) contrast(100%);
+    }
+}
+
+.task__save{
+    margin-right: 1em;
+    color: $blue;
+    @include concert-one;
+    font-size: 1.5rem;
+    &:hover {
+        transform: scale(1.1);
+    }
+    &:active {
+        filter: brightness(0) saturate(100%) invert(17%) sepia(69%) saturate(2200%) hue-rotate(217deg) brightness(119%) contrast(100%);
+    }
+}
+
+.tasks__empty{
+    @include work-sans-thin;
+    color: $dark-gray-button;
+    color: $light-gray;
+    font-size: 1.8rem;
+    margin-bottom: -1em;
+}
+
+.task__edit-form{
+    display: inline-block;
+
+    width: 100%;
+    #newName{
+        background-color: rgba($color: $gray-button, $alpha: .4);
+        border-radius: 5em;
+        padding: .5em;
+        width: 0;
+        margin-right: 1em;
+        animation: edit 1s forwards;
+        &:focus{
+            box-shadow: rgba($color: $blue, $alpha: .8) 0px 0px 0px 2px;
+        }
+    }
+    #newName::placeholder{    
+        font-style: italic;
+        font-size: 1.1rem;
+    }
+}
+
+// _______________________________________
+// hero
+.hero {
+    padding: 0 3em;
+    width: 100vw;
+    height: 91.1vh;
+    margin: 0 auto;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.hero__header {
+    font-size: 4rem;
+    @include fira-bold;
+    text-transform: uppercase;
+    color: $blue;
+    margin-bottom: .2em;
+    letter-spacing: .06em;
+}
+
+.hero__text {
+    text-transform: none;
+    font-size: 2.2rem;
+    letter-spacing: .5px;
+    @include fira-regular;
+    color: $light-gray;
+    margin-bottom: 1.2em
+}
+// _______________________________________
+// signup/login
+.sign-up,
+.log-in {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 2em;
+}
+
+.sign-up__wrapper,
+.log-in__wrapper{
+    margin-top: 3em;
+    flex: 0 0 60%;
+    max-height: 100%;
+    text-align: center;
+    background: #fff;
+    input {
+        border-bottom: 1px solid $light-gray;
+        margin-bottom: 2em;
+        padding-bottom: .5em;
+    }
+}
+
+.sign-up__image,
+.log-in__image {
+    scale: .9;
+    flex: 1 1 40%;
+    width: auto;
+}
+
+.sign-up__form,
+.log-in__form {
+    display: flex;
+    flex-direction: column;
+    padding: 0 3em;
+}
+
+.new-task {
+
+    .title {
+        display: block;
+    }
+    textarea{
+        border: 1px solid $gray;
+        width: 90vw;
+        padding: 1em;
+        margin-bottom: 2em;
+        height: 40vh;
+    }
+}
+
+
+.new-task__form {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+}
+// _______________________________________
+//notifications
+.notification-error,
+.notification-success,
+.internal-error{
+    position: fixed;
+    top: 4.1em;
+    right: -40%;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    width: 15vw;
+    animation: notification-show 2s forwards, notification-hide 2s 5s forwards; 
+}
+
+.notification-error,
+.internal-error{
+    background-color: $red;
+}
+
+.notification-success{
+    background-color: rgb(40, 173, 40);
+}
+//__________________________________________
+//404
+.error{
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    img {
+        width: 50vw;
+    }
+}
+
+//__________________________________________
+//media queries
+@import "responsive";

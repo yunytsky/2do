@@ -1,26 +1,26 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const routes = require("./routes/index");
-const MongoStore = require("connect-mongo");
-const session = require("express-session");
-const passport = require("passport");
-const flash = require("connect-flash");
-const errorHandler = require("./lib/errorHandler");
-const { connect } = require("mongoose");
-const { use } = require("express/lib/application");
+import express from "express";
+import bodyParser from "body-parser";
+import routes from "./routes/index.js";
+import MongoStore from "connect-mongo";
+import session from "express-session";
+import passport from "passport";
+import flash from "connect-flash";
+import { connect } from "mongoose";
+import dotenv from "dotenv";
+import errorHandler from "./lib/errorHandler.js";
 
-require("dotenv").config();
+dotenv.config();
 
 const app = express();
 //_______________________________________________________
 
 //DATABASE
-// const mongoose = require("mongoose");
-// mongoose.connect(process.env.DB_STRING, { useNewUrlParser: true })
-//     .then(() => {
-//         console.log("Connection to the database is established");
-//     })
-//     .catch(err => {console.log("Database connection error: ", err)})
+import mongoose from "mongoose";
+mongoose.connect(process.env.DB_STRING, { useNewUrlParser: true })
+    .then(() => {
+        console.log("Connection to the database is established");
+    })
+    .catch(err => {console.log("Database connection error: ", err)})
 
 //_______________________________________________________
 //VIEW ENGINE
@@ -32,23 +32,23 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.static("public"));
 app.use(bodyParser.text());
 
-//SESSIONS SETUP
-// const store = MongoStore.create({ mongoUrl: process.env.DB_STRING, collectionName: "sessions"});
+// SESSIONS SETUP
+const store = MongoStore.create({ mongoUrl: process.env.DB_STRING, collectionName: "sessions"});
 
-// app.use(session({
-//     secret: process.env.SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     store: store
-// }))
+app.use(session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+    store: store
+}))
 
 //FLASH
 app.use(flash());
 
 //PASSPORT AUTHENTICATION
-// require("./config/passport");
-// app.use(passport.initialize());
-// app.use(passport.session());
+import "./config/passport.js";
+app.use(passport.initialize());
+app.use(passport.session());
 
 //ROUTES  
 app.use(routes);

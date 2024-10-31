@@ -23,7 +23,7 @@
             <% }else{ %>
                 <% for (let i = 0; i < tasks.length; i++) { %>
                     <li class="tasks__task task">
-                        <div class="task__main" id="<%=i%>" >
+                        <div class="task__main" id="<%=tasks[i]._id%>" >
                             <label id="checkbox-wrap">
                                 <input type="checkbox" id="checkbox" name="checkbox">
                                 <span <%if (tasks[i].done == true){%>
@@ -44,7 +44,7 @@
                                 ></span>
                             </p>
                         </div>
-                        <div class="task__operations" id="<%=i%>">
+                        <div class="task__operations" id="<%=tasks[i]._id%>">
                             <button class="task__edit"><img src="/img/edit.svg" alt=""></button>
                             <button class="task__delete"><img src="/img/remove.svg" alt="X"></button>
                             
@@ -54,7 +54,7 @@
             <% } %> 
         </ul>
         <div class="tasks__buttons">
-            <a class="tasks__add" href="/my-tasks/<%= id %>/add">Add new</a>
+            <a class="tasks__add" href="/my-tasks/add">Add new</a>
             <button class="tasks__delete" >Delete everything</button>
         </div>
     </div>
