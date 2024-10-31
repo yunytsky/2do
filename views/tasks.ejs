@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head.ejs") %>
+    <title>ToDoList — <%=username %></title>
+    <style>
+        body{
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <%- include("./partials/header-auth.ejs") %> 
+    <div class="tasks">
+        <h3 class="tasks__header">My tasks</h3>
+        <ul class="tasks__list">
+            <% if(tasks.length == 0) {%>
+            <div class="tasks__empty">
+                Add your first task by clicking a button below
+            </div>
+            <% }else{ %>
+                <% for (let i = 0; i < tasks.length; i++) { %>
+                    <li class="tasks__task task">
+                        <div class="task__main" id="<%=i%>" >
+                            <label id="checkbox-wrap">
+                                <input type="checkbox" id="checkbox" name="checkbox">
+                                <span <%if (tasks[i].done == true){%>
+                                        class="task__checkbox checked"
+                                      <% }else{%>
+                                        class="task__checkbox"
+                                      <% } %> 
+                                >
+                                </span>
+                            </label>
+                            <p class="task__name">
+                                <%= tasks[i].name %>
+                                <span <%if (tasks[i].done == true){%>
+                                        class="line checked"
+                                      <% }else{%>
+                                        class="line"
+                                      <% } %> 
+                                ></span>
+                            </p>
+                        </div>
+                        <div class="task__operations" id="<%=i%>">
+                            <button class="task__edit"><img src="/img/edit.svg" alt=""></button>
+                            <button class="task__delete"><img src="/img/remove.svg" alt="X"></button>
+                            
+                        </div>
+                    </li>
+                <% } %> 
+            <% } %> 
+        </ul>
+        <div class="tasks__buttons">
+            <a class="tasks__add" href="/my-tasks/<%= id %>/add">Add new</a>
+            <button class="tasks__delete" >Delete everything</button>
+        </div>
+    </div>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>

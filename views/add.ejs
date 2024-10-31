@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head.ejs") %>
+    <title>ToDoList — Add</title>
+</head>
+<body>
+    <%- include("./partials/header-auth.ejs") %> 
+    <div class="new-task">
+        <h2 class="title">Add new task</h2>
+        <form class="new-task__form">
+            <label for="newTaskName"></label>
+            <textarea name="newTaskName" id="newTaskName" placeholder="Your task..." required></textarea>
+            <div class="buttons">
+                <label for="newTaskAdd"></label>
+                <a id="newTaskCancel" class="cancel-button" href="/my-tasks/<%=id %> ">Cancel</a>
+                <button type="submit" id="newTaskAdd" class="submit-button">Add +</button>
+            </div>
+        </form>
+    </div>
+    <script src="/js/addTask.js"></script>
+</body>
+
+</html>

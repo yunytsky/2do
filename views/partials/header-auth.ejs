@@ -1,0 +1,10 @@
+<header class="header authorized">
+    <a href="/" class="header__logo">ToDoList</a>
+    <div class="header__buttons-auth">
+        <span>Hello, <%=username %> </span>
+        <form action="/logout" method="GET" >
+            <label for="logout"></label>
+            <button id="logout" type="submit" class="header__log-out">Log out</button>
+        </form>
+    </div>
+</header>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head.ejs") %>
+    <title>ToDoList — Sign Up</title>
+</head>
+<body>
+    <%- include("./partials/header.ejs") %>
+    <main class="sign-up">
+        <% if(messages.length !=0) {%>
+            <span class="notification-error">
+                <%= messages[0] %>
+            </span>
+        <%} %>
+        <div class="sign-up__image">
+            <img src="/img/signup-image.svg">
+        </div>
+        <div class="sign-up__wrapper">
+            <h2 class="title">Sign up</h2>
+            <form  data-aos="fade-left" data-aos-duration="900" class="sign-up__form" action="/signup" method="POST">
+                <label for="sign-up-username"></label>
+                <input type="text" id="sign-up-username" name="username" placeholder="Username" required>
+                <label for="sign-up-password"></label>
+                <input type="password" name="password" id="sign-up-password" placeholder="Password" required>
+                <label for="sign-up-password-2"></label>
+                <input type="password" name="password_2" id="sign-up-password-2" placeholder="Repeat password" required>
+                <div class="buttons">
+                    <label for="sign-up"></label>
+                    <a href="/" id="sign-up-cancel" class="cancel-button">Cancel</a>
+                    <button type="submit" id="sign-up" class="submit-button">Sign up</button>            
+                </div>
+            </form>
+        </div>
+    </main>
+    <%- include("./partials/aos.ejs") %>
+</body>
+</html>
+

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head.ejs") %>
+    <title>ToDoList — Log In</title>
+</head>
+<body>
+    <%- include("./partials/header.ejs") %> 
+    <div class="log-in">
+        <% if(messages[0].length != 0) {%> 
+            <span class="notification-error">
+                    <%= messages[0][0] %>
+            </span>
+        <%}else if(messages[1].length !=0) {%>
+            <span class="notification-success">
+                <%= messages[1][0] %>
+            </span>
+        <% } %> 
+        <div class="log-in__image">
+            <img src="/img/signup-image.svg" >
+        </div>
+        <div class="log-in__wrapper">
+            <h2 class="title">Log in</h2>
+            <form data-aos="fade-left" data-aos-duration="900" class="log-in__form" action="/login" method="POST">
+                <label for="log-in-username"></label>
+                <input type="text" id="log-in-username" name="username" placeholder="Username" required>
+                <label for="log-in-password"></label>
+                <input type="password" name="password" id="log-in-password" placeholder="Password" required>
+                <div class="buttons">
+                    <label for="log-in"></label>
+                     <a href="/" id="sign-up-cancel" class="cancel-button">Cancel</a>
+                    <button type="submit" id="log-in" class="submit-button">Log in</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <%- include("./partials/aos.ejs") %>
+</body>
+</html>
