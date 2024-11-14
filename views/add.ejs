@@ -2,23 +2,45 @@
 <html lang="en">
 <head>
     <%- include("./partials/head.ejs") %>
-    <title>ToDoList — Add</title>
+    <title>ToDoList — Add Task</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
     <%- include("./partials/header-auth.ejs") %> 
-    <div class="new-task">
-        <h2 class="title">Add new task</h2>
-        <form class="new-task__form">
-            <label for="newTaskName"></label>
-            <textarea name="newTaskName" id="newTaskName" placeholder="Your task..." required></textarea>
-            <div class="buttons">
-                <label for="newTaskAdd"></label>
-                <a id="newTaskCancel" class="cancel-button" href="/my-tasks">Cancel</a>
-                <button type="submit" id="newTaskAdd" class="submit-button">Add +</button>
+
+    <div class="new-task__form-container">
+        <h2 class="title">Add New Task</h2>
+        <form class="new-task__form" enctype="multipart/form-data">
+            <!-- Task Name Input -->
+            <label for="taskName">Task Name <span class="required">*</span></label>
+            <input type="text" name="taskName" id="taskName" placeholder="Enter task name..." required>
+
+            <!-- Category Dropdown -->
+            <label for="taskCategory">Category (optional)</label>
+            <select name="taskCategory" id="taskCategory">
+                <option value="">Select a category</option>
+                <% for (let i = 0; i < categories.length; i++) { %>
+                    <option value="<%= categories[i].name %>"><%= categories[i].name %></option>
+                <% } %> 
+                    
+            </select>
+            <a href="/my-categories" class="new-task__categories-link">Manage categories</a>
+
+              <!-- Image Upload -->
+            <label for="taskImage">Upload Image</label>
+            <input type="file" name="taskImage" id="taskImage" accept="image/*">
+
+            <!-- Submit and Cancel Buttons -->
+            <div class="form-buttons">
+                <a href="/my-tasks" class="cancel-button">Cancel</a>
+                <button type="submit" class="submit-button">Add Task</button>
             </div>
         </form>
-    </div>
-    <script src="/js/addTask.js"></script>
-</body>
 
+
+    </div>
+    
+    <script src="/js/add.js"></script>
+
+</body>
 </html>

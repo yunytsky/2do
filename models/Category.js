@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
 
 const CategorySchema = new mongoose.Schema({
-    name: String,
-    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }]
+    name: {type: String, required: true, unique: true},
+    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Task" }],
+    user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }
 });
 
 const Category = mongoose.model("Category", CategorySchema);

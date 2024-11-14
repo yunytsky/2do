@@ -1,5 +1,11 @@
 <header class="header authorized">
-    <a href="/" class="header__logo">ToDoList</a>
+    <div class="header-left">
+        <a href="/" class="header__logo">ToDoList</a>
+        <a class="header__navlink" href="/my-tasks">Tasks</a>
+        <a class="header__navlink" href="/my-categories">Categories</a>
+    </div>
+
+
     <div class="header__buttons-auth">
         <span>Hello, <%=username %> </span>
         <form action="/logout" method="GET" >

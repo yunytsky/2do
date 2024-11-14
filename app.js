@@ -8,9 +8,11 @@ import flash from "connect-flash";
 import { connect } from "mongoose";
 import dotenv from "dotenv";
 import errorHandler from "./lib/errorHandler.js";
+import multer from "multer";
+import path from "path";
+import { addTask } from "./controllers/index.js";
 
 dotenv.config();
-
 const app = express();
 //_______________________________________________________
 
@@ -25,10 +27,24 @@ mongoose.connect(process.env.DB_STRING, { useNewUrlParser: true })
 //_______________________________________________________
 //VIEW ENGINE
 app.set("view engine", "ejs");
+
+//_______________________________________________________
+//STORAGE
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './public/uploads'); 
+    },
+    filename: (req, file, cb) => {
+        const fileName = Date.now() + path.extname(file.originalname);
+        cb(null, fileName);
+    }
+});
+
+const upload = multer({ storage });
 //_______________________________________________________
 //MIDDLEWARE
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({extended: true}));
 app.use(express.static("public"));
 app.use(bodyParser.text());
 
@@ -52,6 +68,7 @@ app.use(passport.session());
 
 //ROUTES  
 app.use(routes);
+app.post("/my-tasks/add", upload.single('image'), addTask);
 
 //ERROR HANDLER
 app.use(errorHandler);
@@ -66,4 +83,5 @@ app.listen(process.env.PORT || 6000, () => {
     const PORT = process.env.PORT || 6000
     console.log(`App is listening on PORT ${PORT}`);
 });
+
 

@@ -9,13 +9,16 @@ import {
   logout,
   signup,
   login,
-  addTask,
   changeTaskStatus,
   deleteTask,
   deleteAllTasks,
   editTask,
+  createCategory,
+  renderCategories,
+  editCategory,
+  deleteCategory
 } from "../controllers/index.js"; 
-import User from "../models/User.js";
+
 const router = express.Router();
 
 
@@ -28,6 +31,9 @@ router.get("/login", renderLogin)
 
 router.get("/my-tasks", renderTasks)
 
+router.get("/my-categories", renderCategories)
+
+
 router.get("/my-tasks/add", renderAddTask)
 
 router.get("/logout", logout)
@@ -37,16 +43,22 @@ router.post('/signup', signup)
 
 router.post("/login", passport.authenticate("local", { failureFlash: true, failureRedirect: "/login"}), login);
 
+router.post("/my-tasks/add/category/create", createCategory)
+
 
 //PATCH
-router.patch("/my-tasks/add", addTask)
-
 router.patch("/my-tasks/:id", changeTaskStatus)
 
-router.patch("/my-tasks/:id/delete", deleteTask)
-
-router.patch("/my-tasks/delete-all", deleteAllTasks)
-
 router.patch("/my-tasks/:id/edit", editTask)
+
+router.patch("/my-categories/:id/edit", editCategory)
+
+
+//DELETE
+router.delete("/my-tasks/:id/delete", deleteTask)
+
+router.delete("/my-tasks/delete-all", deleteAllTasks)
+
+router.delete("/my-categories/:id/delete", deleteCategory)
 
 export default router;

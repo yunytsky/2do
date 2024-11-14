@@ -29,6 +29,8 @@ button {
 }
 
 .cancel-button {
+    color: #292929;
+
     background-color: $gray-button;
 
     &:hover {
@@ -89,7 +91,7 @@ button {
 // ________________________________________________
 // task buttons
 .tasks__add,
-.tasks__delete {
+.tasks__delete, .categories__add {
     display: inline-block;
     text-align: center;
     color: #fff;
@@ -97,7 +99,7 @@ button {
     border-radius: 5px;
 }
 
-.tasks__add {
+.tasks__add, .categories__add{
     background: $blue;
     margin-right: .5em;
 
@@ -112,7 +114,6 @@ button {
 
 .tasks__delete {
     background: $gray-button;
-
     &:hover {
         transform: scale(1.02);
     }

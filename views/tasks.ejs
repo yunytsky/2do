@@ -13,52 +13,70 @@
 </head>
 <body>
     <%- include("./partials/header-auth.ejs") %> 
+
     <div class="tasks">
         <h3 class="tasks__header">My tasks</h3>
-        <ul class="tasks__list">
-            <% if(tasks.length == 0) {%>
-            <div class="tasks__empty">
-                Add your first task by clicking a button below
-            </div>
-            <% }else{ %>
-                <% for (let i = 0; i < tasks.length; i++) { %>
-                    <li class="tasks__task task">
-                        <div class="task__main" id="<%=tasks[i]._id%>" >
-                            <label id="checkbox-wrap">
-                                <input type="checkbox" id="checkbox" name="checkbox">
-                                <span <%if (tasks[i].done == true){%>
-                                        class="task__checkbox checked"
-                                      <% }else{%>
-                                        class="task__checkbox"
-                                      <% } %> 
-                                >
-                                </span>
-                            </label>
-                            <p class="task__name">
-                                <%= tasks[i].name %>
-                                <span <%if (tasks[i].done == true){%>
-                                        class="line checked"
-                                      <% }else{%>
-                                        class="line"
-                                      <% } %> 
-                                ></span>
-                            </p>
-                        </div>
-                        <div class="task__operations" id="<%=tasks[i]._id%>">
-                            <button class="task__edit"><img src="/img/edit.svg" alt=""></button>
-                            <button class="task__delete"><img src="/img/remove.svg" alt="X"></button>
-                            
-                        </div>
-                    </li>
-                <% } %> 
-            <% } %> 
+        <div class="tasks__list">
+            <% if(categorizedTasks.length == 0) { %>
+                <div class="tasks__empty">
+                    Add your first task by clicking a button below
+                </div>
+            <% } else { %>
+                <% categorizedTasks.forEach(group => { %>
+                    <ul id="category">
+                        <h2 class="category-name"><%= group.category %></h2>
+                    
+                        <% group.tasks.forEach(task => { %>
+                            <li class="tasks__task task">
+                                <div class="task__row">
+                                    <div class="task__main" id="<%=task._id%>" >
+                                        <label id="checkbox-wrap">
+                                            <input type="checkbox" id="checkbox" name="checkbox">
+                                            <span <%if (task.done == true){%>
+                                                    class="task__checkbox checked"
+                                                  <% }else{%>
+                                                    class="task__checkbox"
+                                                  <% } %> 
+                                            >
+                                            </span>
+                                        </label>
+                                        <p class="task__name">
+                                            <%= task.name %>
+                                            <span <%if (task.done == true){%>
+                                                    class="line checked"
+                                                  <% }else{%>
+                                                    class="line"
+                                                  <% } %> 
+                                            ></span>
+                                        </p>
+                                    </div>
+                                    <div class="task__operations" id="<%=task._id%>">
+                                        <button class="task__edit"><img src="/img/edit.svg" alt=""></button>
+                                        <button class="task__delete"><img src="/img/remove.svg" alt="X"></button>
+                                        
+                                    </div>
+                                </div>
+                                
+
+                                <% if(task.imageUrl) {%>
+                                    <div class="task__image">
+                                        <img src="<%= task.imageUrl %>" alt="task image">
+                                    </div>
+                                <% } %>
+                            </li>
+                        <% }); %>
+                    </ul>
+
+                <% }); %>
+            <% } %>
         </ul>
-        <div class="tasks__buttons">
+        
+            <div class="tasks__buttons">
             <a class="tasks__add" href="/my-tasks/add">Add new</a>
             <button class="tasks__delete" >Delete everything</button>
         </div>
     </div>
-    <script src="/js/script.js"></script>
+    <script src="/js/tasks.js"></script>
 </body>
 
 </html>

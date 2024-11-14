@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include("./partials/head.ejs") %>
+    <title>ToDoList — <%=username %></title>
+    <style>
+        body{
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+<body>
+    <%- include("./partials/header-auth.ejs") %> 
+    <div id="overlay" class="overlay hidden"></div>
+
+    <div class="categories">
+        <h3 class="categories__header">Categories</h3>
+        <ul class="categories__list">
+            <% if(categories.length == 0) { %>
+                <li class="categories__empty">
+                    Create your first category by clicking a button below
+                </li>
+            <% } else { %>
+                <% categories.forEach(category => { %>
+                    <li class="categories__category category">
+                        <div class="category__main" id="<%=category._id%>" >
+                            <p class="category__name">
+                                <%= category.name %>
+                            </p>
+                        </div>
+                    
+                        <div class="category__operations" id="<%=category._id%>">
+                            <button class="category__edit"><img src="/img/edit.svg" alt=""></button>
+                            <button class="category__delete"><img src="/img/remove.svg" alt="X"></button>
+                        </div>
+                        
+                    </li>
+
+                <% }); %>
+            <% } %>
+        </ul>
+        
+        <div class="categories__buttons">
+            <button class="categories__add" id="addCategoryBtn">Add new</button>
+        </div>
+
+            
+        <!-- Popup for New Category Input -->
+        <div id="newCategoryPopup" class="new-category popup hidden">
+            <h3>Add New Category</h3>
+            <form class="new-category__form">
+                <label for="categoryName">Category name<span class="required">*</span></label>    
+                <input type="text" name="categoryName" id="categoryName" placeholder="Enter category name..." required>
+               
+                <div class="popup-buttons">
+                    <button type="button" class="cancel-button" id="cancelCategoryBtn">Cancel</button>
+                    <button type="submit" class="submit-button" id="createCategoryBtn">Create</button>
+                </div>    
+            </form>
+        </div>
+
+    </div>
+    <script src="/js/categories.js"></script>
+</body>
+
+</html>
